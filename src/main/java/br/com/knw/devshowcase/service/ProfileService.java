@@ -4,6 +4,7 @@ import br.com.knw.devshowcase.dto.profile.*;
 import br.com.knw.devshowcase.model.Profile;
 import br.com.knw.devshowcase.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
+import br.com.knw.devshowcase.exception.ResourceNotFoundException;
 
 @Service
 public class ProfileService {
@@ -16,7 +17,7 @@ public class ProfileService {
     }
     public ProfileResponseDTO findById(Long id){
         return repository.findById(id).map(this::toResponse)
-            .orElseThrow(()->new RuntimeException("Perfil não encontrado"));
+            .orElseThrow(()->new ResourceNotFoundException("Perfil não encontrado"));
     }
     private ProfileResponseDTO toResponse(Profile p){
         return new ProfileResponseDTO(p.getId(),p.getName(),p.getEmail(),p.getBio());

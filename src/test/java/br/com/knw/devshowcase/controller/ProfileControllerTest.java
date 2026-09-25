@@ -33,7 +33,7 @@ class ProfileControllerTest {
         mockMvc.perform(post("/api/profiles")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     @Test

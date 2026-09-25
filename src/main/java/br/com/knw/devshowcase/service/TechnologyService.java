@@ -4,6 +4,7 @@ import br.com.knw.devshowcase.dto.technology.*;
 import br.com.knw.devshowcase.model.Technology;
 import br.com.knw.devshowcase.repository.TechnologyRepository;
 import org.springframework.stereotype.Service;
+import br.com.knw.devshowcase.exception.ResourceNotFoundException;
 import java.util.List;
 
 @Service
@@ -19,7 +20,7 @@ public class TechnologyService {
         return repository.findAll().stream().map(this::toResponse).toList();
     }
     public Technology findEntityById(Long id){
-        return repository.findById(id).orElseThrow(()->new RuntimeException("Tecnologia não encontrada"));
+        return repository.findById(id).orElseThrow(()->new ResourceNotFoundException("Tecnologia não encontrada"));
     }
     private TechnologyResponseDTO toResponse(Technology t){return new TechnologyResponseDTO(t.getId(),t.getName());}
 }
